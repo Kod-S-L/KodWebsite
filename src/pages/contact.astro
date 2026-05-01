@@ -1,0 +1,290 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const contactMethods = [
+  {
+    icon: '✉️',
+    label: 'Email',
+    value: 'hello@kodteam.dev',
+    href: 'mailto:hello@kodteam.dev',
+  },
+  {
+    icon: '🐙',
+    label: 'GitHub',
+    value: 'github.com/Kod-S-L',
+    href: 'https://github.com/Kod-S-L',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with the KOD team. We'd love to hear from you."
+>
+  <!-- Header -->
+  <section class="page-header section">
+    <div class="container">
+      <span class="section-label">Say Hello</span>
+      <h1 class="section-title">Get in <span class="highlight">Touch</span></h1>
+      <p class="section-subtitle">
+        Have a question, a project idea, or just want to chat? We're happy to
+        hear from you.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="section contact-section">
+    <div class="container contact-grid">
+      <!-- Contact Methods -->
+      <div class="contact-info">
+        <h2 class="info-title">Ways to reach us</h2>
+        <p class="info-text">
+          We try to respond within 48 hours. For project inquiries please
+          include a short description of your idea.
+        </p>
+
+        <div class="contact-methods">
+          {contactMethods.map(({ icon, label, value, href }) => (
+            <a href={href} class="contact-method card" target="_blank" rel="noopener noreferrer">
+              <span class="method-icon" aria-hidden="true">{icon}</span>
+              <div>
+                <span class="method-label">{label}</span>
+                <span class="method-value">{value}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-wrapper">
+        <form class="contact-form card" id="contactForm" novalidate>
+          <h2 class="form-title">Send a message</h2>
+
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-input"
+              placeholder="Your name"
+              required
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="you@example.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="subject" class="form-label">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              class="form-input"
+              placeholder="What's this about?"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-input form-textarea"
+              placeholder="Tell us more..."
+              rows={5}
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary submit-btn">
+            Send Message →
+          </button>
+
+          <p class="form-notice" id="formNotice" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(var(--nav-height) + 3rem);
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .highlight {
+    color: var(--color-primary);
+  }
+
+  /* Contact layout */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .info-title,
+  .form-title {
+    font-size: 1.3rem;
+    color: var(--color-white);
+    margin-bottom: 0.75rem;
+  }
+
+  .info-text {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+  }
+
+  .method-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .method-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.15rem;
+  }
+
+  .method-value {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--color-primary-light);
+    font-weight: 500;
+  }
+
+  /* Form */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .form-input {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.9rem;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    transition: border-color var(--transition), box-shadow var(--transition);
+    width: 100%;
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .submit-btn {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .form-notice {
+    font-size: 0.875rem;
+    min-height: 1.2em;
+  }
+
+  .form-notice.success { color: #43e97b; }
+  .form-notice.error   { color: var(--color-accent); }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const notice = document.getElementById('formNotice');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+    const name    = (data.get('name')    as string).trim();
+    const email   = (data.get('email')   as string).trim();
+    const subject = (data.get('subject') as string).trim();
+    const message = (data.get('message') as string).trim();
+
+    if (!name || !email || !subject || !message) {
+      if (notice) {
+        notice.textContent = 'Please fill in all fields.';
+        notice.className = 'form-notice error';
+      }
+      return;
+    }
+
+    // Static site: open default mail client as fallback
+    const mailtoLink = `mailto:hello@kodteam.dev?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+    window.location.href = mailtoLink;
+
+    if (notice) {
+      notice.textContent = 'Opening your mail client…';
+      notice.className = 'form-notice success';
+    }
+
+    form.reset();
+  });
+</script>

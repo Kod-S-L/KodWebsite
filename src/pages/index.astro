@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const features = [
+  {
+    icon: '⚡',
+    title: 'Fast by Default',
+    description:
+      'We ship performant, lightweight software. Every kilobyte counts.',
+  },
+  {
+    icon: '🔒',
+    title: 'Security First',
+    description:
+      'Security is baked in, not bolted on. We build systems you can trust.',
+  },
+  {
+    icon: '🤝',
+    title: 'Open Collaboration',
+    description:
+      'Three developers, one mission. Transparent processes and shared ownership.',
+  },
+  {
+    icon: '🚀',
+    title: 'Ship Early, Iterate',
+    description:
+      'We believe in continuous improvement — release often, learn fast, get better.',
+  },
+];
+---
+
+<BaseLayout title="Home" description="KOD — a team building modern software, one line at a time.">
+  <!-- Hero -->
+  <section class="hero section">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <span class="section-label">Welcome to</span>
+        <h1 class="hero-title">
+          We are <span class="highlight">[KOD]</span>
+        </h1>
+        <p class="hero-description">
+          A small, focused team building modern, open software. We value clean
+          code, good documentation, and shipping things that actually work.
+        </p>
+        <div class="hero-actions">
+          <a href="/projects" class="btn btn-primary">See Our Projects</a>
+          <a href="/about" class="btn btn-outline">Meet the Team</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="code-block">
+          <div class="code-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <pre><code><span class="c-keyword">const</span> <span class="c-var">team</span> = <span class="c-bracket">&#123;</span>
+  name<span class="c-punct">:</span> <span class="c-string">"KOD"</span><span class="c-punct">,</span>
+  members<span class="c-punct">:</span> <span class="c-num">3</span><span class="c-punct">,</span>
+  mission<span class="c-punct">:</span> <span class="c-string">"build cool stuff"</span><span class="c-punct">,</span>
+  stack<span class="c-punct">:</span> <span class="c-bracket">[</span>
+    <span class="c-string">"Astro"</span><span class="c-punct">,</span>
+    <span class="c-string">"TypeScript"</span><span class="c-punct">,</span>
+    <span class="c-string">"Rust/Wasm"</span><span class="c-punct">,</span>
+  <span class="c-bracket">]</span><span class="c-punct">,</span>
+<span class="c-bracket">&#125;</span><span class="c-punct">;</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section features-section">
+    <div class="container">
+      <span class="section-label">What We Stand For</span>
+      <h2 class="section-title">Our Principles</h2>
+      <p class="section-subtitle">
+        Everything we build is guided by a few core ideas.
+      </p>
+
+      <div class="grid-2">
+        {features.map(({ icon, title, description }) => (
+          <div class="card feature-card">
+            <span class="feature-icon" aria-hidden="true">{icon}</span>
+            <h3 class="feature-title">{title}</h3>
+            <p>{description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="container cta-inner">
+      <div class="gradient-line"></div>
+      <h2 class="section-title">Ready to see what we're building?</h2>
+      <p class="section-subtitle">
+        Explore our current projects or get in touch with the team.
+      </p>
+      <div class="cta-actions">
+        <a href="/projects" class="btn btn-primary">View Projects</a>
+        <a href="/contact" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding-top: calc(var(--nav-height) + 3rem);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-title {
+    margin-bottom: 1.25rem;
+    color: var(--color-white);
+  }
+
+  .highlight {
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 48ch;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Code Block Visual ── */
+  .code-block {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  .code-dots {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .code-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-border);
+  }
+
+  .code-dots span:nth-child(1) { background: #ff5f56; }
+  .code-dots span:nth-child(2) { background: #ffbd2e; }
+  .code-dots span:nth-child(3) { background: #27c93f; }
+
+  pre {
+    padding: 1.5rem;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    line-height: 1.8;
+  }
+
+  .c-keyword { color: #c792ea; }
+  .c-var     { color: #82aaff; }
+  .c-string  { color: #c3e88d; }
+  .c-num     { color: #f78c6c; }
+  .c-punct   { color: var(--color-text-muted); }
+  .c-bracket { color: #ffcb6b; }
+
+  /* ── Features ── */
+  .features-section {
+    background: var(--color-bg-alt);
+  }
+
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+  }
+
+  .feature-title {
+    font-size: 1.1rem;
+    color: var(--color-white);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--color-bg);
+  }
+
+  .cta-inner {
+    max-width: 600px;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+      display: none;
+    }
+  }
+</style>

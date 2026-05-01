@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const members = [
+  {
+    name: 'Developer 1',
+    role: 'Full-Stack Engineer',
+    bio: 'Passionate about building scalable web applications and developer tooling. Loves Rust and functional programming.',
+    skills: ['TypeScript', 'Rust', 'Node.js', 'PostgreSQL'],
+    initials: 'D1',
+    color: '#6c63ff',
+  },
+  {
+    name: 'Developer 2',
+    role: 'Frontend Engineer',
+    bio: 'Focused on crafting pixel-perfect UIs and great user experiences. Enthusiast of modern CSS and accessibility.',
+    skills: ['Astro', 'React', 'CSS', 'Figma'],
+    initials: 'D2',
+    color: '#ff6584',
+  },
+  {
+    name: 'Developer 3',
+    role: 'Backend & DevOps',
+    bio: 'Keeps the infrastructure running and loves automating everything. CI/CD pipelines, containers and cloud native tools.',
+    skills: ['Docker', 'Linux', 'Go', 'Kubernetes'],
+    initials: 'D3',
+    color: '#43e97b',
+  },
+];
+
+const values = [
+  { title: 'Craft', description: 'We care deeply about the quality of our work and take pride in the details.' },
+  { title: 'Openness', description: 'We communicate openly, document thoroughly, and build in public where we can.' },
+  { title: 'Growth', description: 'We learn constantly — from each other, from our mistakes, and from the community.' },
+  { title: 'Balance', description: 'Great software is built by rested, happy people. We value sustainable pace.' },
+];
+---
+
+<BaseLayout title="About" description="Meet the KOD team — three developers on a mission to build modern, quality software.">
+  <!-- Header -->
+  <section class="page-header section">
+    <div class="container">
+      <span class="section-label">Who We Are</span>
+      <h1 class="section-title">About <span class="highlight">KOD</span></h1>
+      <p class="section-subtitle">
+        KOD is a small, tight-knit team of three developers who share a passion
+        for clean code, good design, and shipping software that matters.
+      </p>
+    </div>
+  </section>
+
+  <!-- Team Members -->
+  <section class="section team-section">
+    <div class="container">
+      <span class="section-label">The Team</span>
+      <h2 class="section-title">Meet the Developers</h2>
+
+      <div class="team-grid">
+        {members.map(({ name, role, bio, skills, initials, color }) => (
+          <div class="member-card card">
+            <div class="member-avatar" style={`background: ${color}22; color: ${color};`}>
+              {initials}
+            </div>
+            <div class="member-info">
+              <h3 class="member-name">{name}</h3>
+              <span class="member-role">{role}</span>
+              <p class="member-bio">{bio}</p>
+              <div class="member-skills">
+                {skills.map((skill) => (
+                  <span class="tag">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section values-section">
+    <div class="container">
+      <span class="section-label">What Drives Us</span>
+      <h2 class="section-title">Our Values</h2>
+
+      <div class="grid-2 values-grid">
+        {values.map(({ title, description }) => (
+          <div class="value-item">
+            <div class="gradient-line"></div>
+            <h3 class="value-title">{title}</h3>
+            <p>{description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(var(--nav-height) + 3rem);
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .highlight {
+    color: var(--color-primary);
+  }
+
+  /* Team */
+  .team-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .member-card {
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-start;
+  }
+
+  .member-avatar {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    font-family: var(--font-mono);
+  }
+
+  .member-name {
+    font-size: 1.1rem;
+    color: var(--color-white);
+    margin-bottom: 0.2rem;
+  }
+
+  .member-role {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .member-bio {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .member-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  /* Values */
+  .values-section {
+    background: var(--color-bg-alt);
+  }
+
+  .values-grid {
+    margin-top: 2rem;
+  }
+
+  .value-item {
+    padding: 1.5rem 0;
+  }
+
+  .value-title {
+    font-size: 1.2rem;
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .member-card {
+      flex-direction: column;
+    }
+  }
+</style>

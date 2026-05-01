@@ -1,0 +1,31 @@
+# Build outputs
+dist/
+.output/
+
+# Dependencies
+node_modules/
+
+# Astro cache
+.astro/
+
+# Vercel
+.vercel/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
+
+# Rust / WASM build artefacts
+wasm/target/
+public/wasm-pkg/

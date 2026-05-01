@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+type ProjectStatus = 'Active' | 'In Progress' | 'Planned';
+
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  status: ProjectStatus;
+  link?: string;
+}
+
+const projects: Project[] = [
+  {
+    title: 'KOD Website',
+    description:
+      'The official KOD team website. Built with Astro and TypeScript for maximum performance, with optional Rust/WebAssembly modules for future advanced features.',
+    tags: ['Astro', 'TypeScript', 'WebAssembly', 'Vercel'],
+    status: 'Active',
+    link: '/',
+  },
+  {
+    title: 'CLI Toolkit',
+    description:
+      'A collection of command-line utilities to speed up common developer workflows. Written in Rust for safety and performance.',
+    tags: ['Rust', 'CLI', 'DevTools'],
+    status: 'In Progress',
+  },
+  {
+    title: 'API Gateway',
+    description:
+      'A lightweight, configurable API gateway to handle authentication, rate-limiting, and routing for microservices architectures.',
+    tags: ['Go', 'Docker', 'Kubernetes'],
+    status: 'Planned',
+  },
+  {
+    title: 'Design System',
+    description:
+      'A shared component library and design tokens system that keeps all KOD projects visually consistent and accessible.',
+    tags: ['TypeScript', 'CSS', 'Accessibility'],
+    status: 'Planned',
+  },
+];
+
+const statusColors: Record<ProjectStatus, string> = {
+  Active: '#43e97b',
+  'In Progress': '#ffbd2e',
+  Planned: '#8888aa',
+};
+---
+
+<BaseLayout
+  title="Projects"
+  description="Explore what KOD is building — active projects, works in progress, and what's coming next."
+>
+  <!-- Header -->
+  <section class="page-header section">
+    <div class="container">
+      <span class="section-label">What We Build</span>
+      <h1 class="section-title">Our <span class="highlight">Projects</span></h1>
+      <p class="section-subtitle">
+        A mix of active work, experiments in progress, and ideas on the
+        roadmap. Everything starts as an idea — these are ours.
+      </p>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="projects-grid">
+        {projects.map(({ title, description, tags, status, link }) => (
+          <article class="project-card card">
+            <div class="project-header">
+              <h2 class="project-title">
+                {link ? <a href={link}>{title}</a> : title}
+              </h2>
+              <span
+                class="project-status"
+                style={`color: ${statusColors[status]}; border-color: ${statusColors[status]}40; background: ${statusColors[status]}12;`}
+              >
+                <span class="status-dot" style={`background: ${statusColors[status]};`}></span>
+                {status}
+              </span>
+            </div>
+            <p class="project-description">{description}</p>
+            <div class="project-tags">
+              {tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contribute CTA -->
+  <section class="section cta-section">
+    <div class="container cta-inner">
+      <div class="gradient-line"></div>
+      <h2 class="section-title">Have an idea?</h2>
+      <p class="section-subtitle">
+        We're always open to new project ideas and collaborations. Reach out
+        and let's talk.
+      </p>
+      <a href="/contact" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(var(--nav-height) + 3rem);
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .highlight {
+    color: var(--color-primary);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .project-title {
+    font-size: 1.15rem;
+    color: var(--color-white);
+  }
+
+  .project-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .project-title a:hover {
+    color: var(--color-primary-light);
+  }
+
+  .project-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    border: 1px solid;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .project-description {
+    font-size: 0.95rem;
+    flex: 1;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .cta-section {
+    background: var(--color-bg-alt);
+  }
+
+  .cta-inner {
+    max-width: 540px;
+  }
+</style>
