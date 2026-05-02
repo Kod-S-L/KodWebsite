@@ -65,14 +65,31 @@ For manual deploys or CLI usage, see [`docs/deployment.md`](docs/deployment.md).
 KodWebsite/
 ├── public/              # Static assets served as-is (favicon, robots.txt, …)
 ├── src/
-│   ├── components/      # Reusable Astro components (Navbar, Footer, …)
+│   ├── components/      # Reusable Astro components
+│   │   ├── Logo.astro
+│   │   ├── Icon.astro
+│   │   ├── Navbar.astro
+│   │   ├── Footer.astro
+│   │   ├── PageHeader.astro
+│   │   ├── CallToAction.astro
+│   │   ├── ServiceCard.astro
+│   │   ├── ProjectCard.astro
+│   │   └── ProjectsCarousel.astro
+│   ├── data/            # Shared typed data
+│   │   ├── nav-links.ts
+│   │   ├── services.ts
+│   │   └── projects.ts
 │   ├── layouts/         # Page layouts (BaseLayout wraps every page)
-│   ├── pages/           # File-based routing (index, about, projects, contact)
+│   ├── pages/           # File-based routing (index, about, projects, contact, 404)
 │   └── styles/          # Global CSS variables and base styles
 ├── docs/                # Team documentation
+│   ├── ai_rules.md      # Rules for AI assistants working in this repo
+│   ├── code_style.md    # Code style conventions
+│   ├── project_context.md
 │   ├── setup.md         # Local development setup guide
 │   ├── deployment.md    # Vercel & alternative deployment instructions
-│   └── workflow.md      # Git workflow, PR process, team conventions
+│   ├── workflow.md      # Git workflow, PR process, team conventions
+│   └── i18n_plan.md     # Plan for adding /ca, /es, /en multilingual routes
 ├── wasm/                # Optional Rust/WebAssembly module (see below)
 │   ├── src/lib.rs       # Rust source code
 │   ├── Cargo.toml       # Rust package manifest
@@ -106,6 +123,7 @@ See [`wasm/README.md`](wasm/README.md) for full build and usage instructions.
 | [`docs/setup.md`](docs/setup.md) | Local environment setup |
 | [`docs/deployment.md`](docs/deployment.md) | Deployment on Vercel and alternatives |
 | [`docs/workflow.md`](docs/workflow.md) | Git workflow, PR process, team conventions |
+| [`docs/i18n_plan.md`](docs/i18n_plan.md) | Plan for adding multilingual routes (`/ca`, `/es`, `/en`) |
 
 ---
 

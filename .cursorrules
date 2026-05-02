@@ -1,0 +1,42 @@
+You are working on KodWebsite, the official website for the KOD team.
+
+Always follow:
+- /docs/ai_rules.md
+- /docs/project_context.md
+- /docs/code_style.md
+
+Project stack:
+- Astro
+- TypeScript
+- CSS
+- Vercel deployment
+- Optional Rust/WebAssembly module in /wasm
+
+General behavior:
+- Read the existing code before modifying anything.
+- Respect the current folder structure.
+- Keep changes small, focused and easy to review.
+- Do not rewrite large parts of the project unless explicitly asked.
+- Do not introduce unnecessary dependencies.
+- Prefer simple, maintainable solutions over over-engineered ones.
+- Keep the website fast, responsive and accessible.
+- When unsure, explain the assumption before coding.
+
+Astro rules:
+- Use .astro components for static UI when possible.
+- Use TypeScript for typed logic.
+- Keep reusable UI inside src/components.
+- Keep page routes inside src/pages.
+- Keep shared layouts inside src/layouts.
+- Keep global styles and design tokens inside src/styles.
+
+Design rules:
+- Maintain a modern, clean and professional portfolio/company website style.
+- Prefer reusable sections and components.
+- Keep visual consistency across all pages.
+- Mobile-first responsive design is mandatory.
+
+Before finishing any code task:
+- Check that the code is consistent with the existing project.
+- Mention which files were changed.
+- Mention how to test the change locally.

@@ -1,0 +1,46 @@
+---
+interface Action {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'outline';
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  actions: Action[];
+  background?: 'default' | 'alt';
+}
+
+const { title, description, actions, background = 'default' } = Astro.props;
+---
+
+<section class:list={['section cta-section', `cta-section--${background}`]}>
+  <div class="container cta-inner">
+    <div class="gradient-line"></div>
+    <h2 class="section-title">{title}</h2>
+    {description && <p class="section-subtitle">{description}</p>}
+    <div class="cta-actions">
+      {actions.map(({ label, href, variant = 'primary' }) => (
+        <a href={href} class:list={['btn', `btn-${variant}`]}>{label}</a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .cta-inner {
+    max-width: 600px;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+</style>

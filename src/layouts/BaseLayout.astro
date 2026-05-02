@@ -11,11 +11,14 @@ interface Props {
 
 const {
   title,
-  description = 'KOD — a team building modern software, one line at a time.',
+  description = 'KOD builds fast, reliable websites, custom software and business automations for teams that want to grow.',
+  // TODO: add a real social-share image at /public/og-default.png (1200×630).
+  // Until then, the URL below resolves to a 404 in social previews.
   ogImage = '/og-default.png',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === 'Home' ? 'KOD' : `${title} | KOD`;
 ---
 
 <!doctype html>
@@ -26,20 +29,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title} | KOD</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={`${title} | KOD`} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} | KOD`} />
+    <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
 
     <!-- Fonts -->
@@ -51,8 +54,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <Navbar />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <Footer />
