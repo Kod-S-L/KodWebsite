@@ -1,0 +1,225 @@
+---
+import Icon from './Icon.astro';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  /** When true the card is laid out for the carousel (fixed width). */
+  variant?: 'grid' | 'carousel';
+}
+
+const { project, variant = 'grid' } = Astro.props;
+const {
+  title,
+  description,
+  category,
+  status,
+  image,
+  externalUrl,
+  detailsUrl,
+  tags,
+} = project;
+---
+
+<article class:list={['project-card card', `project-card--${variant}`]}>
+  <div class="project-media" aria-hidden={!image}>
+    {image ? (
+      <img src={image} alt={`${title} screenshot`} loading="lazy" decoding="async" />
+    ) : (
+      <div class="project-placeholder">
+        <span class="project-placeholder__bracket">[</span>
+        <span class="project-placeholder__category">{category}</span>
+        <span class="project-placeholder__bracket">]</span>
+      </div>
+    )}
+    <span class="project-status" data-status={status}>
+      <span class="status-dot"></span>{status}
+    </span>
+  </div>
+
+  <div class="project-body">
+    <span class="project-category">{category}</span>
+    <h3 class="project-title">{title}</h3>
+    <p class="project-description">{description}</p>
+
+    {tags && tags.length > 0 && (
+      <div class="project-tags">
+        {tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+    )}
+
+    <div class="project-actions">
+      {externalUrl && (
+        <a
+          href={externalUrl}
+          class="project-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Visit ${title} (opens in a new tab)`}
+        >
+          Visit site <Icon name="external" size={16} />
+        </a>
+      )}
+      {detailsUrl && (
+        <a href={detailsUrl} class="project-link project-link--muted">
+          View details <Icon name="arrow-right" size={16} />
+        </a>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .project-card--carousel {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+  }
+
+  .project-media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .project-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    background:
+      linear-gradient(135deg, rgba(108, 99, 255, 0.06), transparent 60%),
+      var(--color-bg-alt);
+  }
+
+  .project-placeholder__bracket {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .project-placeholder__category {
+    text-transform: uppercase;
+  }
+
+  .project-status {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 9999px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid;
+    background: rgba(10, 10, 15, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .project-status[data-status='Active'] {
+    color: #43e97b;
+    border-color: rgba(67, 233, 123, 0.35);
+  }
+  .project-status[data-status='Active'] .status-dot { background: #43e97b; }
+
+  .project-status[data-status='In Progress'] {
+    color: #ffbd2e;
+    border-color: rgba(255, 189, 46, 0.35);
+  }
+  .project-status[data-status='In Progress'] .status-dot { background: #ffbd2e; }
+
+  .project-status[data-status='Planned'] {
+    color: var(--color-text-muted);
+    border-color: var(--color-border);
+  }
+  .project-status[data-status='Planned'] .status-dot { background: var(--color-text-muted); }
+
+  .project-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  .project-category {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .project-title {
+    font-size: 1.15rem;
+    color: var(--color-white);
+  }
+
+  .project-description {
+    font-size: 0.95rem;
+    flex: 1;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary-light);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .project-link:hover {
+    color: var(--color-white);
+  }
+
+  .project-link--muted {
+    color: var(--color-text-muted);
+  }
+</style>

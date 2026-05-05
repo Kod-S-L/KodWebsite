@@ -1,0 +1,29 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  highlight?: string;
+  description?: string;
+}
+
+const { label, title, highlight, description } = Astro.props;
+---
+
+<section class="page-header section">
+  <div class="container">
+    <span class="section-label">{label}</span>
+    <h1 class="section-title">
+      {title}
+      {highlight && <> <span class="highlight">{highlight}</span></>}
+    </h1>
+    {description && <p class="section-subtitle">{description}</p>}
+  </div>
+</section>
+
+<style>
+  .page-header {
+    padding-top: calc(var(--nav-height) + 3rem);
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+  }
+</style>

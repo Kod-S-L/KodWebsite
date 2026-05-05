@@ -211,3 +211,70 @@ p {
   border-radius: 9999px;
   margin-bottom: 1.5rem;
 }
+
+/* ─── Highlight (used in titles to emphasize a word) ─────────────── */
+.highlight {
+  color: var(--color-primary);
+}
+
+/* ─── Typing bar (terminal cursor accent) ────────────────────────── */
+/*
+ * A subtle blinking bar used as a terminal/code-style accent. Used
+ * sparingly — only next to the main hero identity. Decorative only,
+ * always paired with `aria-hidden="true"`.
+ */
+.typing-bar {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1em;
+  margin-left: 0.15ch;
+  background: var(--color-primary);
+  vertical-align: -0.1em;
+  border-radius: 1px;
+  animation: typing-blink 1.05s steps(2, end) infinite;
+}
+
+@keyframes typing-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-bar {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ─── Skip link (accessibility) ──────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--color-surface);
+  color: var(--color-white);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 200;
+  transform: translateY(-150%);
+  transition: transform var(--transition);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  color: var(--color-white);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

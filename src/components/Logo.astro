@@ -1,0 +1,45 @@
+---
+interface Props {
+  href?: string;
+  size?: 'sm' | 'md';
+  ariaLabel?: string;
+  class?: string;
+}
+
+const {
+  href = '/',
+  size = 'md',
+  ariaLabel = 'KOD home',
+  class: className,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={['logo', `logo--${size}`, className]}
+  aria-label={ariaLabel}
+>
+  <span class="logo__bracket">[</span>KOD<span class="logo__bracket">]</span>
+</a>
+
+<style>
+  .logo {
+    display: inline-block;
+    font-weight: 800;
+    color: var(--color-white);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .logo:hover {
+    color: var(--color-primary-light);
+  }
+
+  .logo--md { font-size: 1.4rem; }
+  .logo--sm { font-size: 1.3rem; }
+
+  .logo__bracket {
+    color: var(--color-primary);
+  }
+</style>
